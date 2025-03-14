@@ -115,5 +115,14 @@ class SimpleRateLimiter {
     public function release() {
         $this->redis->incr($this->bucketKey);
     }
+	
+    /**
+     * Debug function that returns the current number of free tokens available.
+     *
+     * @return int The current free token count.
+     */
+    public function debugFreeTokens() {
+        return (int)$this->redis->get($this->bucketKey);
+    }
 }
 ?>
