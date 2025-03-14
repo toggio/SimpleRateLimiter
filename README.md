@@ -71,7 +71,9 @@ if (!$limiter->acquire()) {
 try {
     // Critical section: Place your code here.
     echo "Executing critical operations...\n";
+    echo "Free tokens: " . $limiter->debugFreeTokens() . "\n";
     // ... your operations here ...
+    sleep(3);
 } catch (Exception $e) {
     echo "Error: " . $e->getMessage();
 } finally {
@@ -104,6 +106,12 @@ If the delay mechanism is enabled, a delay proportional to the tokens consumed i
 
 ### `release()`
 Releases a token back to the bucket by incrementing the token count.
+
+### `debugFreeTokens()`
+Returns the current number of free tokens available. This is useful for debugging the rate limiter's state.
+
+**Returns:**
+- (int) The current free token count.
 
 ## How it Works
 
